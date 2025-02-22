@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Invoice</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">GST Simplify AI</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/add_invoice">Add Invoice</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/view_invoices">View Invoices</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/generate_report">Generate Report</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Invoice Form -->
+<div class="container mt-5">
+    <h3 class="text-center">Add New Invoice</h3>
+    <form method="POST">
+        <div class="mb-3">
+            <label for="invoice_id" class="form-label">Invoice ID</label>
+            <input type="text" class="form-control" id="invoice_id" name="invoice_id" required>
+        </div>
+        <div class="mb-3">
+            <label for="date" class="form-label">Date</label>
+            <input type="date" class="form-control" id="date" name="date" required>
+        </div>
+        <div class="mb-3">
+            <label for="amount" class="form-label">Amount</label>
+            <input type="number" class="form-control" id="amount" name="amount" required step="0.01">
+        </div>
+        <div class="mb-3">
+            <label for="gst_rate" class="form-label">GST Rate (%)</label>
+            <input type="number" class="form-control" id="gst_rate" name="gst_rate" required step="0.01">
+        </div>
+
+        <!-- Placeholder for calculated GST and total -->
+        <div>
+            <p id="gst_amount">GST Amount: ₹0.00</p>
+            <p id="total">Total Amount: ₹0.00</p>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add Invoice</button>
+    </form>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- JavaScript for Dynamic GST Calculation -->
+<script>
+document.getElementById('amount').addEventListener('input', calculateGST);
+document.getElementById('gst_rate').addEventListener('input', calculateGST);
+
+function calculateGST() {
+    const amount = parseFloat(document.getElementById('amount').value) || 0;
+    const gstRate = parseFloat(document.getElementById('gst_rate').value) || 0;
+    const gstAmount = amount * (gstRate / 100);
+    const total = amount + gstAmount;
+
+    document.getElementById('gst_amount').textContent = `GST Amount: ₹${gstAmount.toFixed(2)}`;
+    document.getElementById('total').textContent = `Total Amount: ₹${total.toFixed(2)}`;
+}
+</script>
+
+</body>
+</html>

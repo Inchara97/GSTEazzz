@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Invoices</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">GST Simplify AI</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/add_invoice">Add Invoice</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/view_invoices">View Invoices</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/generate_report">Generate Report</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Invoice Table -->
+<div class="container mt-5">
+    <h3 class="text-center">Invoices List</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Invoice ID</th>
+                <th scope="col">Date</th>
+                <th scope="col">Amount</th>
+                <th scope="col">GST Amount</th>
+                <th scope="col">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for invoice in invoices %}
+            <tr>
+                <td>{{ invoice.invoice_id }}</td>
+                <td>{{ invoice.date }}</td>
+                <td>₹{{ invoice.amount }}</td>
+                <td>₹{{ invoice.gst_amount }}</td>
+                <td>₹{{ invoice.total }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
